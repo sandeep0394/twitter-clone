@@ -15,7 +15,7 @@ import authRoutes from './routes/auth.js';
 import userRoutes from './routes/user.js';
 import postRoutes from './routes/post.routes.js';
 import notificationRoutes from './routes/notification.routes.js';
-import achievementRoutes from '../backend/routes/achievementRoutes.js';
+
 
 dotenv.config();
 
@@ -42,7 +42,7 @@ app.use(cookieParser());
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/posts', postRoutes);
-app.use('/api/achievements', achievementRoutes);
+
 
 app.use('/api/notifications', notificationRoutes);
 // ✅ MongoDB Connection
@@ -67,7 +67,7 @@ app.post("/like", async (req, res) => {
   const { postId, userId } = req.body;
 
   await Post.findByIdAndUpdate(postId, { $inc: { likes: 1 } });
-  await checkAndUnlockAchievements(userId);
+
 
   res.json({ message: "Post liked!" });
 });
